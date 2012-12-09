@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<html>
+<body>
+  <canvas id="a" width=500 style="border: 5px solid red"height=500></canvas>
+  <script type="text/javascript">
+    var c = 100;
+    var r = 100;
+    var array = new Array(r);
+    var a_canvas = document.getElementById("a");
+    var a_context = a_canvas.getContext("2d");
+
+    for(var i=0;i<r;i+=1){
+      array[i]=new Array(c);
+      }
+   function begin(){
+     var q,w;	
+     var k=2000;
+     for(var i=0;i<k;i++){
+       q = parseInt(Math.random()*r)
+       w = parseInt(Math.random()*c)
+       array[q][w]=1;
+       }
+       result();
+       }
+  function result(){
+    for(var m=0;m<r;m++){
+      for(var n=0;n<c;n++){	
+        if(array[m][n]==1){
+	  a_context.fillStyle='green'
+          }
+	else{
+	  a_context.fillStyle='black'		
+          }
+        a_context.beginPath();
+        a_context.fillRect(m*5,n*5,5,5);
+	a_context.closePath();
+	}}}
+  begin();	
+  setInterval(game,100);
+  function game(){
+    for (i = 0; i < r; i++){
+      for(j = 0; j < c; j++) {
+	if(array[i]!=undefined && array[i-1]!=undefined && array[i+1]!=undefined){ 
+          count = num(i,j)
+          if (count < 2 || count > 3) {array[i][j] = 0;}
+          if (count === 3) {array[i][j] = 1}}}}
+    result();}
+  function num(i,j){	
+    var z=0;
+    if(array[i][j+1]==1)
+      {z++;}
+    if(array[i][j-1]==1)
+      {z++;}
+    if(array[i+1][j]==1)
+     {z++;}
+    if(array[i+1][j-1]==1)
+      {z++;}
+    if(array[i+1][j+1]==1)
+      {z++;}
+    if(array[i-1][j]==1)
+      {z++;}
+    if(array[i-1][j-1]==1)
+      {z++;}
+    if(array[i-1][j+1]==1)
+      {z++;}
+    return z;
+    }
+  </script>
+</body>
+</html>
